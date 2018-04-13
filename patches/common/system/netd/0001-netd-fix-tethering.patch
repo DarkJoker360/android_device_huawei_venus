@@ -1,21 +1,67 @@
-From d512061ff457004bb0b19b3be01e110d1e183b54 Mon Sep 17 00:00:00 2001
+From 5e941f4dec40a7ac63e9f8dc3ea3f4e7b4820653 Mon Sep 17 00:00:00 2001
 From: Meticulus <theonejohnnyd@gmail.com>
-Date: Wed, 22 Feb 2017 08:26:38 -0600
-Subject: [PATCH] netd: fix tethering
+Date: Fri, 13 Apr 2018 13:40:23 -0500
+Subject: [PATCH] "0001-netd-fix-tethering _______________________________
 
--This command fails but Android 6.0 iptables was IPV4 anyways
-I think. So this really doesn't matter to us..
+*Previous From d512061ff457004bb0b19b3be01e110d1e183b54 Mon Sep 17 00:00:00 2001
+*Previous From: Meticulus <theonejohnnyd@gmail.com>
+*Previous Date: Wed, 22 Feb 2017 08:26:38 -0600
+*Previous Subject: [PATCH] netd: fix tethering
+*
+*-This command fails but Android 6.0 iptables was IPV4 anyways
+*I think. So this really doesn't matter to us..
+*
+*Change-Id: I5e858e912abfd36d39893870a2ffa05cb18f9dfd"
 
-Change-Id: I5e858e912abfd36d39893870a2ffa05cb18f9dfd
+Change-Id: I47568ab242b7c3340fe6c6b8f2c9c0f62847928f
 ---
- server/NatController.cpp | 55 ++++++++++++++++++++++++------------------------
- 1 file changed, 28 insertions(+), 27 deletions(-)
+ server/NatController.cpp | 37 ++++++++++++++++++-------------------
+ 1 file changed, 18 insertions(+), 19 deletions(-)
 
 diff --git a/server/NatController.cpp b/server/NatController.cpp
-index cda8f5f..c25f10d 100644
+index 58c732d..f4fbdd8 100644
 --- a/server/NatController.cpp
 +++ b/server/NatController.cpp
-@@ -148,7 +148,6 @@ int NatController::setDefaults() {
+@@ -91,7 +91,7 @@ int NatController::setupIptablesHooks() {
+         return res;
+     }
+ 
+-    res = iptablesRestoreFunction(V4V6, defaultCommands);
++    res = iptablesRestoreFunction(V4, defaultCommands);
+     if (res < 0) {
+         return res;
+     }
+@@ -110,7 +110,7 @@ int NatController::setDefaults() {
+         "*nat\n"
+         ":%s -\n"
+         "COMMIT\n", LOCAL_FORWARD, LOCAL_FORWARD, LOCAL_NAT_POSTROUTING);
+-
++/*
+     std::string v6Cmd = StringPrintf(
+         "*filter\n"
+         ":%s -\n"
+@@ -118,17 +118,17 @@ int NatController::setDefaults() {
+         "*raw\n"
+         ":%s -\n"
+         "COMMIT\n", LOCAL_FORWARD, LOCAL_RAW_PREROUTING);
+-
++*/
+     int res = iptablesRestoreFunction(V4, v4Cmd);
+     if (res < 0) {
+         return res;
+     }
+-
++/*
+     res = iptablesRestoreFunction(V6, v6Cmd);
+     if (res < 0) {
+         return res;
+     }
+-
++*/
+     natCount = 0;
+ 
+     return 0;
+@@ -136,7 +136,6 @@ int NatController::setDefaults() {
  
  int NatController::enableNat(const char* intIface, const char* extIface) {
      ALOGV("enableNat(intIface=<%s>, extIface=<%s>)",intIface, extIface);
@@ -23,81 +69,80 @@ index cda8f5f..c25f10d 100644
      if (!isIfaceName(intIface) || !isIfaceName(extIface)) {
          errno = ENODEV;
          return -1;
-@@ -345,25 +344,27 @@ int NatController::setForwardRules(bool add, const char *intIface, const char *e
-             LOCAL_TETHER_COUNTERS_CHAIN
-     };
- 
--    const char *cmd4[] = {
--            IP6TABLES_PATH,
--            "-w",
--            "-t",
--            "raw",
--            add ? "-A" : "-D",
--            LOCAL_RAW_PREROUTING,
--            "-i",
--            intIface,
--            "-m",
--            "rpfilter",
--            "--invert",
--            "!",
--            "-s",
--            "fe80::/64",
--            "-j",
--            "DROP"
--    };
+@@ -160,15 +159,15 @@ int NatController::enableNat(const char* intIface, const char* extIface) {
+         /*
+          * IPv6 tethering doesn't need the state-based conntrack rules, so
+          * it unconditionally jumps to the tether counters chain all the time.
+-         */
++
+         std::vector<std::string> v6Cmds = {
+             "*filter",
+             StringPrintf("-A %s -g %s", LOCAL_FORWARD, LOCAL_TETHER_COUNTERS_CHAIN),
+             "COMMIT\n"
+         };
 -
-+// Meticulus: avoid Werror by not creating this cmd.
-+// Comment long way so we can see in patch.
-+//    const char *cmd4[] = {
-+//            IP6TABLES_PATH,
-+//            "-w",
-+//            "-t",
-+//            "raw",
-+//            add ? "-A" : "-D",
-+//            LOCAL_RAW_PREROUTING,
-+//            "-i",
-+//            intIface,
-+//            "-m",
-+//            "rpfilter",
-+//            "--invert",
-+//            "!",
-+//            "-s",
-+//            "fe80::/64",
-+//            "-j",
-+//            "DROP"
-+//    };
-+//
-     if (runCmd(ARRAY_SIZE(cmd2), cmd2) && add) {
-         // bail on error, but only if adding
-         rc = -1;
-@@ -376,10 +377,10 @@ int NatController::setForwardRules(bool add, const char *intIface, const char *e
-         goto err_return;
+-        if (iptablesRestoreFunction(V4, Join(v4Cmds, '\n')) ||
+-            iptablesRestoreFunction(V6, Join(v6Cmds, '\n'))) {
++*/
++        if (iptablesRestoreFunction(V4, Join(v4Cmds, '\n')) /*||
++            iptablesRestoreFunction(V6, Join(v6Cmds, '\n'))*/) {
+             ALOGE("Error setting postroute rule: iface=%s", extIface);
+             // unwind what's been done, but don't care about success - what more could we do?
+             setDefaults();
+@@ -205,10 +204,10 @@ int NatController::setForwardRules(bool add, const char *intIface, const char *e
+         "*raw\n"
+         "%s %s -i %s -m rpfilter --invert ! -s fe80::/64 -j DROP\n"
+         "COMMIT\n", op, LOCAL_RAW_PREROUTING, intIface);
+-    if (iptablesRestoreFunction(V6, rpfilterCmd) == -1 && add) {
++/*    if (iptablesRestoreFunction(V6, rpfilterCmd) == -1 && add) {
+         return -1;
+     }
+-
++*/
+     std::vector<std::string> v4 = {
+         "*filter",
+         StringPrintf("%s %s -i %s -o %s -m state --state ESTABLISHED,RELATED -g %s",
+@@ -218,21 +217,21 @@ int NatController::setForwardRules(bool add, const char *intIface, const char *e
+         StringPrintf("%s %s -i %s -o %s -g %s",
+                      op, LOCAL_FORWARD, intIface, extIface, LOCAL_TETHER_COUNTERS_CHAIN),
+     };
+-
++/*
+     std::vector<std::string> v6 = {
+         "*filter",
+     };
+-
++*/
+     /* We only ever add tethering quota rules so that they stick. */
+     std::string pair1 = StringPrintf("%s_%s", intIface, extIface);
+     if (add && !checkTetherCountingRuleExist(pair1)) {
+         v4.push_back(makeTetherCountingRule(intIface, extIface));
+-        v6.push_back(makeTetherCountingRule(intIface, extIface));
++//        v6.push_back(makeTetherCountingRule(intIface, extIface));
+     }
+     std::string pair2 = StringPrintf("%s_%s", extIface, intIface);
+     if (add && !checkTetherCountingRuleExist(pair2)) {
+         v4.push_back(makeTetherCountingRule(extIface, intIface));
+-        v6.push_back(makeTetherCountingRule(extIface, intIface));
++//        v6.push_back(makeTetherCountingRule(extIface, intIface));
      }
  
--    if (runCmd(ARRAY_SIZE(cmd4), cmd4) && add) {
--        rc = -1;
--        goto err_rpfilter;
--    }
-+//    if (runCmd(ARRAY_SIZE(cmd4), cmd4) && add) {
-+//        rc = -1;
-+//        goto err_rpfilter;
-+//    }
+     // Always make sure the drop rule is at the end.
+@@ -244,11 +243,11 @@ int NatController::setForwardRules(bool add, const char *intIface, const char *e
+     }
  
-     if (setTetherCountingRules(add, intIface, extIface) && add) {
-         rc = -1;
-@@ -388,9 +389,9 @@ int NatController::setForwardRules(bool add, const char *intIface, const char *e
+     v4.push_back("COMMIT\n");
+-    v6.push_back("COMMIT\n");
++ //   v6.push_back("COMMIT\n");
  
-     return 0;
- 
--err_rpfilter:
--    cmd3[2] = "-D";
--    runCmd(ARRAY_SIZE(cmd3), cmd3);
-+//err_rpfilter:
-+//    cmd3[2] = "-D";
-+//    runCmd(ARRAY_SIZE(cmd3), cmd3);
- err_return:
-     cmd2[2] = "-D";
-     runCmd(ARRAY_SIZE(cmd2), cmd2);
+     // We only add IPv6 rules here, never remove them.
+-    if (iptablesRestoreFunction(V4, Join(v4, '\n')) == -1 ||
+-        (add && iptablesRestoreFunction(V6, Join(v6, '\n')) == -1)) {
++    if (iptablesRestoreFunction(V4, Join(v4, '\n')) == -1 /*||
++        (add && iptablesRestoreFunction(V6, Join(v6, '\n')) == -1)*/) {
+         // unwind what's been done, but don't care about success - what more could we do?
+         if (add) {
+             setForwardRules(false, intIface, extIface);
 -- 
-1.9.1
+2.7.4
 
