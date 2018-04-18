@@ -17,7 +17,6 @@
 
 toplinks := \
     app \
-    build.prop \
     firmware \
     framework \
     media \
