@@ -115,11 +115,11 @@ service hostapd /vendor/bin/hostapd_hisi -d /data/misc/wifi/hostapd.conf
     oneshot
     seclabel u:r:metiotg:s0
 
-#service hsgnss /vendor/bin/gnss_engine_hisi -normal
-#    class main
-#    user gps
-#    group system inet root wakelock
-#    disabled
+service hsgnss /vendor/bin/gnss_engine_hisi -normal
+    class main
+    user gps
+    group system inet root wakelock
+    disabled
 
 service agnsscontrol /vendor/bin/gnss_control_hisi -normal
     class main
