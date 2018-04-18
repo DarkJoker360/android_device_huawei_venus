@@ -27,7 +27,6 @@ PRODUCT_COPY_FILES += \
 
 # CodeOfHonor Settings Integration
 PRODUCT_PACKAGES += \
-    CodinalteParts \
     volumeinput
 
 # CodeOfHonor Releasetools
