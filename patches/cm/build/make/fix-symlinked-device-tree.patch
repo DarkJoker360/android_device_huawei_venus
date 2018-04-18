@@ -1,13 +1,18 @@
-From a325f7e535e355044c2480a2f4f6df8d47f8d404 Mon Sep 17 00:00:00 2001
+From e8db929ae763e7dce5bafa6abc5ed8fb2ebe0189 Mon Sep 17 00:00:00 2001
 From: Meticulus <theonejohnnyd@gmail.com>
-Date: Wed, 28 Feb 2018 08:39:56 -0600
+Date: Tue, 17 Apr 2018 08:43:02 -0500
 Subject: [PATCH] "fix-symlinked-device-tree _______________________________
 
-*Previous From c2def5883bb7d3b64ba516c19580ac88548cf09e Mon Sep 17 00:00:00 2001
+*Previous From a325f7e535e355044c2480a2f4f6df8d47f8d404 Mon Sep 17 00:00:00 2001
 *Previous From: Meticulus <theonejohnnyd@gmail.com>
-*Previous Date: Wed, 22 Feb 2017 10:39:56 -0600
-*Previous Subject: [PATCH] fix-symlinked-device-tree
-*"
+*Previous Date: Wed, 28 Feb 2018 08:39:56 -0600
+*Previous Subject: [PATCH] "fix-symlinked-device-tree _______________________________
+*
+**Previous From c2def5883bb7d3b64ba516c19580ac88548cf09e Mon Sep 17 00:00:00 2001
+**Previous From: Meticulus <theonejohnnyd@gmail.com>
+**Previous Date: Wed, 22 Feb 2017 10:39:56 -0600
+**Previous Subject: [PATCH] fix-symlinked-device-tree
+**""
 ---
  core/envsetup.mk       | 4 ++--
  core/product_config.mk | 2 +-
@@ -29,7 +34,7 @@ index d9842e3..0c83a0e 100644
  ifeq ($(board_config_mk),)
    $(error No config file found for TARGET_DEVICE $(TARGET_DEVICE))
 diff --git a/core/product_config.mk b/core/product_config.mk
-index 06525f2..1b2690d 100644
+index aec296c..d57a3a8 100644
 --- a/core/product_config.mk
 +++ b/core/product_config.mk
 @@ -170,7 +170,7 @@ include $(BUILD_SYSTEM)/device.mk
@@ -38,9 +43,9 @@ index 06525f2..1b2690d 100644
  ifneq ($(RR_BUILD),)
 -  all_product_configs := $(shell find device -path "*/$(RR_BUILD)/rr.mk")
 +  all_product_configs := $(shell find -L device -path "*/$(RR_BUILD)/rr.mk")
+   all_product_configs += $(wildcard vendor/rr/build/target/product/rr_$(RR_BUILD).mk)
  else
    ifneq ($(strip $(TARGET_BUILD_APPS)),)
-   # An unbundled app build needs only the core product makefiles.
 -- 
 2.7.4
 
