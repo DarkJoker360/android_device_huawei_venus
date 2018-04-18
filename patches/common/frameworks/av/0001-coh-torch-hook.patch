@@ -1,16 +1,23 @@
-From a9bd5399dcb35ac71334e120f4e64169f573b918 Mon Sep 17 00:00:00 2001
+From cdf8f7f7f86bcef73bd4a52c886048e36ec4aed0 Mon Sep 17 00:00:00 2001
 From: Meticulus <theonejohnnyd@gmail.com>
-Date: Sun, 25 Mar 2018 16:54:09 -0500
-Subject: [PATCH] "0001-camera-fix-torch _______________________________
+Date: Tue, 17 Apr 2018 08:46:09 -0500
+Subject: [PATCH] "0001-coh-torch-hook _______________________________
 
-*Previous From bfb7f0921e74424b047372ea76f49f6a7b87eae9 Mon Sep 17 00:00:00 2001
+*Previous From a9bd5399dcb35ac71334e120f4e64169f573b918 Mon Sep 17 00:00:00 2001
 *Previous From: Meticulus <theonejohnnyd@gmail.com>
-*Previous Date: Thu, 22 Mar 2018 09:26:24 -0500
-*Previous Subject: [PATCH] camera: fix torch
+*Previous Date: Sun, 25 Mar 2018 16:54:09 -0500
+*Previous Subject: [PATCH] "0001-camera-fix-torch _______________________________
 *
-*Change-Id: If0099373c9d45cc5b4066cc5624a7c03f7ae1c12"
+**Previous From bfb7f0921e74424b047372ea76f49f6a7b87eae9 Mon Sep 17 00:00:00 2001
+**Previous From: Meticulus <theonejohnnyd@gmail.com>
+**Previous Date: Thu, 22 Mar 2018 09:26:24 -0500
+**Previous Subject: [PATCH] camera: fix torch
+**
+**Change-Id: If0099373c9d45cc5b4066cc5624a7c03f7ae1c12"
+*
+*Change-Id: I5b2d67879f3ef8c88851fcc2d3a4157ce5d506e9"
 
-Change-Id: I5b2d67879f3ef8c88851fcc2d3a4157ce5d506e9
+Change-Id: I3647eef279a022a40a89db56ac5d0d74c201e802
 ---
  services/camera/libcameraservice/Android.mk           |  8 +++++---
  services/camera/libcameraservice/CameraFlashlight.cpp |  5 +++++
@@ -18,10 +25,10 @@ Change-Id: I5b2d67879f3ef8c88851fcc2d3a4157ce5d506e9
  3 files changed, 22 insertions(+), 3 deletions(-)
 
 diff --git a/services/camera/libcameraservice/Android.mk b/services/camera/libcameraservice/Android.mk
-index 7ec3ccb..29e4810 100644
+index 1415a76..8c04354 100644
 --- a/services/camera/libcameraservice/Android.mk
 +++ b/services/camera/libcameraservice/Android.mk
-@@ -78,18 +78,20 @@ LOCAL_SHARED_LIBRARIES:= \
+@@ -78,7 +78,8 @@ LOCAL_SHARED_LIBRARIES:= \
      android.hardware.camera.provider@2.4 \
      android.hardware.camera.device@1.0 \
      android.hardware.camera.device@3.2 \
@@ -29,7 +36,9 @@ index 7ec3ccb..29e4810 100644
 +    android.hardware.camera.device@3.3 \
 +    libcoh_linux
  
- LOCAL_EXPORT_SHARED_LIBRARY_HEADERS := libbinder libcamera_client libfmq
+ ifeq ($(TARGET_USES_QTI_CAMERA_DEVICE), true)
+ LOCAL_CFLAGS += -DQTI_CAMERA_DEVICE
+@@ -90,12 +91,13 @@ LOCAL_EXPORT_SHARED_LIBRARY_HEADERS := libbinder libcamera_client libfmq
  
  LOCAL_C_INCLUDES += \
      system/media/private/camera/include \
