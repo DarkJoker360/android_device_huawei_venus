@@ -34,7 +34,6 @@ TARGET_SCREEN_HEIGHT := 1920
 TARGET_SCREEN_WIDTH := 1080
 
 PRODUCT_PACKAGES += \
-    Snap \
     mkyaffs2image \
     mkuserimg.sh
 
