@@ -25,9 +25,11 @@ $(shell cp -f $(LOCAL_PATH)/prebuilt/ninja prebuilts/build-tools/linux-x86/bin/n
 PRODUCT_COPY_FILES += \
         $(LOCAL_PATH)/recovery/init.recovery.meticulus.rc:root/init.recovery.meticulus.rc
 
-# CodeOfHonor Settings Integration
+# CodeOfHonor bins
 PRODUCT_PACKAGES += \
-    volumeinput
+    volumeinput \
+    coh_otgd \
+    coh_rotgd
 
 # CodeOfHonor Releasetools
 TARGET_RELEASETOOLS_EXTENSIONS := $(LOCAL_PATH)
