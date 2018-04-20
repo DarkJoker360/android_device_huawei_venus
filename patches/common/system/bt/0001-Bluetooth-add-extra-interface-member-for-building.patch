@@ -1,0 +1,30 @@
+From f5fdd1f9db7c69cb48510ebab570dc25cb51aa4c Mon Sep 17 00:00:00 2001
+From: Meticulus <theonejohnnyd@gmail.com>
+Date: Fri, 20 Apr 2018 05:16:51 -0500
+Subject: [PATCH] Bluetooth: add extra interface member for building.
+
+-/system/bt is built but not installed during the build. Since
+we have patched the bluetooth interface to match nougat, it
+will fail to build if we don't add nougat interface member.
+-Basically this is just here so that build does not fail.
+
+Change-Id: I1ccae42aa9b1eced933c7c18f38deb21ee8fe6be
+---
+ btif/src/bluetooth.cc | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/btif/src/bluetooth.cc b/btif/src/bluetooth.cc
+index 1d2c66a..a541942 100644
+--- a/btif/src/bluetooth.cc
++++ b/btif/src/bluetooth.cc
+@@ -439,6 +439,7 @@ static const bt_interface_t bluetoothInterface = {
+     get_profile_interface,
+     dut_mode_configure,
+     dut_mode_send,
++    NULL,
+     le_test_mode,
+     set_os_callouts,
+     read_energy_info,
+-- 
+2.7.4
+

@@ -1,0 +1,114 @@
+From 8fe95bb7b8581b696732b8bb2dfb35c6515b3ae1 Mon Sep 17 00:00:00 2001
+From: Meticulus <theonejohnnyd@gmail.com>
+Date: Thu, 19 Apr 2018 13:20:36 -0500
+Subject: [PATCH] "0001-bluetooth-crappy-stop-crash
+ _______________________________
+
+*Previous From 4130efefb992ce00e44c2518a71409eebe54d728 Mon Sep 17 00:00:00 2001
+*Previous From: Meticulus <theonejohnnyd@gmail.com>
+*Previous Date: Wed, 18 Apr 2018 15:45:19 -0500
+*Previous Subject: [PATCH] bluetooth: crappy stop crash
+*
+*Change-Id: Id5866aec0521d8ecc5753ad6c3d8bd1f03ccc498"
+
+Change-Id: I7357d577557078bcaef661205cca3833fe8c9f53
+---
+ Android.mk                                             | 2 +-
+ jni/com_android_bluetooth_a2dp.cpp                     | 2 +-
+ jni/com_android_bluetooth_a2dp_sink.cpp                | 2 +-
+ jni/com_android_bluetooth_btservice_AdapterService.cpp | 3 ++-
+ jni/com_android_bluetooth_gatt.cpp                     | 4 ++--
+ jni/com_android_bluetooth_hdp.cpp                      | 2 +-
+ 6 files changed, 8 insertions(+), 7 deletions(-)
+
+diff --git a/Android.mk b/Android.mk
+index 97390fd..36f3cc3 100644
+--- a/Android.mk
++++ b/Android.mk
+@@ -28,7 +28,7 @@ LOCAL_STATIC_ANDROID_LIBRARIES := \
+         android-support-v4
+ LOCAL_PROTOC_OPTIMIZE_TYPE := micro
+ 
+-LOCAL_REQUIRED_MODULES := bluetooth.default
++#LOCAL_REQUIRED_MODULES := bluetooth.default
+ 
+ LOCAL_PROGUARD_ENABLED := disabled
+ 
+diff --git a/jni/com_android_bluetooth_a2dp.cpp b/jni/com_android_bluetooth_a2dp.cpp
+index 26c9359..7786fdb 100644
+--- a/jni/com_android_bluetooth_a2dp.cpp
++++ b/jni/com_android_bluetooth_a2dp.cpp
+@@ -294,7 +294,7 @@ static void cleanupNative(JNIEnv* env, jobject object) {
+     return;
+   }
+ 
+-  if (sBluetoothA2dpInterface != NULL) {
++  if (sBluetoothA2dpInterface != NULL && sBluetoothA2dpInterface->cleanup != NULL) {
+     sBluetoothA2dpInterface->cleanup();
+     sBluetoothA2dpInterface = NULL;
+   }
+diff --git a/jni/com_android_bluetooth_a2dp_sink.cpp b/jni/com_android_bluetooth_a2dp_sink.cpp
+index 989cd6f..7d8237d 100644
+--- a/jni/com_android_bluetooth_a2dp_sink.cpp
++++ b/jni/com_android_bluetooth_a2dp_sink.cpp
+@@ -155,7 +155,7 @@ static void cleanupNative(JNIEnv* env, jobject object) {
+     return;
+   }
+ 
+-  if (sBluetoothA2dpInterface != NULL) {
++  if (sBluetoothA2dpInterface != NULL && sBluetoothA2dpInterface->cleanup != NULL) {
+     sBluetoothA2dpInterface->cleanup();
+     sBluetoothA2dpInterface = NULL;
+   }
+diff --git a/jni/com_android_bluetooth_btservice_AdapterService.cpp b/jni/com_android_bluetooth_btservice_AdapterService.cpp
+index dc2e07a..e1f823f 100644
+--- a/jni/com_android_bluetooth_btservice_AdapterService.cpp
++++ b/jni/com_android_bluetooth_btservice_AdapterService.cpp
+@@ -688,7 +688,8 @@ static bool cleanupNative(JNIEnv* env, jobject obj) {
+ 
+   if (!sBluetoothInterface) return JNI_FALSE;
+ 
+-  sBluetoothInterface->cleanup();
++  if(sBluetoothInterface->cleanup != NULL)
++	sBluetoothInterface->cleanup();
+   ALOGI("%s: return from cleanup", __func__);
+ 
+   env->DeleteGlobalRef(sJniCallbacksObj);
+diff --git a/jni/com_android_bluetooth_gatt.cpp b/jni/com_android_bluetooth_gatt.cpp
+index 3bfbcfd..4b5f16e 100644
+--- a/jni/com_android_bluetooth_gatt.cpp
++++ b/jni/com_android_bluetooth_gatt.cpp
+@@ -915,7 +915,7 @@ static void cleanupNative(JNIEnv* env, jobject object) {
+   if (!btIf) return;
+ 
+   if (sGattIf != NULL) {
+-    sGattIf->cleanup();
++    //sGattIf->cleanup();
+     sGattIf = NULL;
+   }
+ 
+@@ -962,7 +962,7 @@ void btgattc_register_scanner_cb(bt_uuid_t app_uuid, uint8_t scannerId,
+ 
+ static void registerScannerNative(JNIEnv* env, jobject object,
+                                   jlong app_uuid_lsb, jlong app_uuid_msb) {
+-  if (!sGattIf) return;
++  if (sGattIf) return;
+ 
+   bt_uuid_t uuid;
+   set_uuid(uuid.uu, app_uuid_msb, app_uuid_lsb);
+diff --git a/jni/com_android_bluetooth_hdp.cpp b/jni/com_android_bluetooth_hdp.cpp
+index 3abc243..d80af94 100644
+--- a/jni/com_android_bluetooth_hdp.cpp
++++ b/jni/com_android_bluetooth_hdp.cpp
+@@ -131,7 +131,7 @@ static void cleanupNative(JNIEnv* env, jobject object) {
+ 
+   if (sBluetoothHdpInterface != NULL) {
+     ALOGW("Cleaning up Bluetooth Health Interface...");
+-    sBluetoothHdpInterface->cleanup();
++    //sBluetoothHdpInterface->cleanup();
+     sBluetoothHdpInterface = NULL;
+   }
+ 
+-- 
+2.7.4
+

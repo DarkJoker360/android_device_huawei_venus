@@ -1,0 +1,31 @@
+From d9a693ba9d3d654bcfaa3d5b05a446f94e2e753b Mon Sep 17 00:00:00 2001
+From: Meticulus <theonejohnnyd@gmail.com>
+Date: Wed, 18 Apr 2018 15:35:25 -0500
+Subject: [PATCH] libhardware: nougat bt on oreo
+
+-Fix bt interface stack.
+
+Change-Id: Id97f79220163ece939cefb5fedb0ca6e3ec26ba8
+---
+ include/hardware/bluetooth.h | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/include/hardware/bluetooth.h b/include/hardware/bluetooth.h
+index 9fd91cb..9c1ad32 100644
+--- a/include/hardware/bluetooth.h
++++ b/include/hardware/bluetooth.h
+@@ -556,7 +556,10 @@ typedef struct {
+ 
+     /* Send any test HCI (vendor-specific) command to the controller. Must be in DUT Mode */
+     int (*dut_mode_send)(uint16_t opcode, uint8_t *buf, uint8_t len);
+-    /** BLE Test Mode APIs */
++
++    /* Send any test HCI command to the controller. */
++    int (*hci_cmd_send)(uint16_t opcode, uint8_t *buf, uint8_t len);
++	/** BLE Test Mode APIs */
+     /* opcode MUST be one of: LE_Receiver_Test, LE_Transmitter_Test, LE_Test_End */
+     int (*le_test_mode)(uint16_t opcode, uint8_t *buf, uint8_t len);
+ 
+-- 
+2.7.4
+
