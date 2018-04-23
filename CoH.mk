@@ -40,4 +40,6 @@ endif
 
 PRODUCT_PACKAGES += \
     hwkeystore \
-    hwgatekeeperd
+    hwgatekeeperd \
+    fingerprintd \
+    coh_hikeymaker

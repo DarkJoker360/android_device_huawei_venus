@@ -82,8 +82,8 @@ PRODUCT_PACKAGES += \
 # Fingerprint
 # target 'android.hardware.biometrics.fingerprint@2.1-service' hase been changed
 # fingerprintd to work with Huawei nougat teec implementation
-PRODUCT_PACKAGES += \
-    fingerprintd
+#PRODUCT_PACKAGES += \
+#    fingerprintd
 
 # USB
 PRODUCT_PACKAGES += \
