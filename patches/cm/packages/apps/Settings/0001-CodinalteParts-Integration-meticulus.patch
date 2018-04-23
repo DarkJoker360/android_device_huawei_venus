@@ -1,28 +1,36 @@
-From 3db548cb3a5bd7257a591f7ae86dffe8370dbf87 Mon Sep 17 00:00:00 2001
+From 033fc0e7209fb453237ff2e9ef3c72ba7a68d265 Mon Sep 17 00:00:00 2001
 From: Meticulus <theonejohnnyd@gmail.com>
-Date: Wed, 11 Apr 2018 13:40:32 -0500
+Date: Sat, 21 Apr 2018 17:11:56 -0500
 Subject: [PATCH] "0001-CodinalteParts-Integration-meticulus
  _______________________________
 
-*Previous From b6f0a3f3273626c8fa482473f5589c301f5fce7b Mon Sep 17 00:00:00 2001
+*Previous From 3db548cb3a5bd7257a591f7ae86dffe8370dbf87 Mon Sep 17 00:00:00 2001
 *Previous From: Meticulus <theonejohnnyd@gmail.com>
-*Previous Date: Wed, 11 Apr 2018 11:16:11 -0500
+*Previous Date: Wed, 11 Apr 2018 13:40:32 -0500
 *Previous Subject: [PATCH] "0001-CodinalteParts-Integration-meticulus
 *_______________________________
 *
-**Previous From bb3b4f860f438de62b2333ab5e2c1e5662e47a25 Mon Sep 17 00:00:00 2001
+**Previous From b6f0a3f3273626c8fa482473f5589c301f5fce7b Mon Sep 17 00:00:00 2001
 **Previous From: Meticulus <theonejohnnyd@gmail.com>
-**Previous Date: Fri, 24 Mar 2017 11:57:08 -0500
-**Previous Subject: [PATCH] 0001-CodinalteParts-Integration
+**Previous Date: Wed, 11 Apr 2018 11:16:11 -0500
+**Previous Subject: [PATCH] "0001-CodinalteParts-Integration-meticulus
+**_______________________________
 **
-**Change-Id: I8f1bc456b5048fe07c5caf26c57b6754db40c292"
+***Previous From bb3b4f860f438de62b2333ab5e2c1e5662e47a25 Mon Sep 17 00:00:00 2001
+***Previous From: Meticulus <theonejohnnyd@gmail.com>
+***Previous Date: Fri, 24 Mar 2017 11:57:08 -0500
+***Previous Subject: [PATCH] 0001-CodinalteParts-Integration
+***
+***Change-Id: I8f1bc456b5048fe07c5caf26c57b6754db40c292"
+**
+**Change-Id: I2d66256a41e6a1da22f01f20f09cdf6fcbb66c54"
 *
-*Change-Id: I2d66256a41e6a1da22f01f20f09cdf6fcbb66c54"
+*Change-Id: I73ecfa72b87550b36cbfde80018919eaa120f478"
 
-Change-Id: I73ecfa72b87550b36cbfde80018919eaa120f478
+Change-Id: I4bf136ffac45f0957bd2ab9d9e163f38654287db
 ---
  Android.mk                            | 10 +++++++++-
- AndroidManifest.xml                   | 12 ++++++++++++
+ AndroidManifest.xml                   | 18 ++++++++++++++++++
  res/values-af/meticulus.xml           |  5 +++++
  res/values-am/meticulus.xml           |  5 +++++
  res/values-ar/meticulus.xml           |  5 +++++
@@ -126,10 +134,10 @@ Change-Id: I73ecfa72b87550b36cbfde80018919eaa120f478
  res/values-zh-rCN/meticulus.xml       |  5 +++++
  res/values-zh-rTW/meticulus.xml       |  5 +++++
  res/values-zu/meticulus.xml           |  5 +++++
- res/values/meticulus.xml              |  7 +++++++
+ res/values/meticulus.xml              |  9 +++++++++
  res/xml/device_info_settings.xml      |  8 ++++++++
- res/xml/system_dashboard_fragment.xml | 11 ++++++++++-
- 108 files changed, 561 insertions(+), 2 deletions(-)
+ res/xml/system_dashboard_fragment.xml | 20 +++++++++++++++++++-
+ 108 files changed, 578 insertions(+), 2 deletions(-)
  create mode 100644 res/values-af/meticulus.xml
  create mode 100644 res/values-am/meticulus.xml
  create mode 100644 res/values-ar/meticulus.xml
@@ -257,10 +265,10 @@ index 5c309a4..3d34f7b 100644
  LOCAL_STATIC_ANDROID_LIBRARIES := \
      android-support-v4 \
 diff --git a/AndroidManifest.xml b/AndroidManifest.xml
-index 5dac489..6eec499 100644
+index c2bb538..c472739 100644
 --- a/AndroidManifest.xml
 +++ b/AndroidManifest.xml
-@@ -3488,5 +3488,17 @@
+@@ -3488,5 +3488,23 @@
          </activity>
  
          <!-- This is the longest AndroidManifest.xml ever. -->
@@ -275,7 +283,13 @@ index 5dac489..6eec499 100644
 +            android:label="@string/sponsors" >
 +        </activity>
 +	<activity android:name="com.meticulus.codinalteparts.app.LedActivity"
-+          android:parentActivityName="com.meticulus.codinalteparts.app.MainActivity" />
++          android:label="@string/meticulus_led_summary">
++	</activity>
++        <receiver android:name="com.meticulus.codinalteparts.app.bootreceiver" >
++            <intent-filter>
++                <action android:name="android.intent.action.BOOT_COMPLETED" />
++            </intent-filter>
++        </receiver> 
      </application>
  </manifest>
 diff --git a/res/values-af/meticulus.xml b/res/values-af/meticulus.xml
@@ -1413,15 +1427,17 @@ index 0000000..33b6512
 +</resources>
 diff --git a/res/values/meticulus.xml b/res/values/meticulus.xml
 new file mode 100644
-index 0000000..b8603b6
+index 0000000..d7575fe
 --- /dev/null
 +++ b/res/values/meticulus.xml
-@@ -0,0 +1,7 @@
+@@ -0,0 +1,9 @@
 +<?xml version="1.0" encoding="utf-8"?>
 +<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 +    <string name="meticulus_sponsors">Sponsors</string>
-+    <string name="meticulus_extra">Extra</string>
-+    <string name="meticulus_extra_summary">Meticulus Development's Extra</string>
++    <string name="meticulus_extra">Extra Configurations</string>
++    <string name="meticulus_extra_summary">Meti\'s Crazy Hacks</string>
++    <string name="meticulus_led">LED Thingy</string>
++    <string name="meticulus_led_summary">Fun with lights!</string>
 +    <string name="meticulus_sponsors_summary">Awesome people who made this ROM possible!</string>
 +</resources>
 diff --git a/res/xml/device_info_settings.xml b/res/xml/device_info_settings.xml
@@ -1444,26 +1460,35 @@ index c76bed7..1b4fadb 100644
          <Preference android:key="status_info"
                  android:title="@string/device_status"
 diff --git a/res/xml/system_dashboard_fragment.xml b/res/xml/system_dashboard_fragment.xml
-index a71c758..c0fd609 100644
+index a71c758..ae93616 100644
 --- a/res/xml/system_dashboard_fragment.xml
 +++ b/res/xml/system_dashboard_fragment.xml
-@@ -18,6 +18,15 @@
+@@ -18,6 +18,24 @@
      xmlns:android="http://schemas.android.com/apk/res/android"
      android:title="@string/header_category_system">
  
 +    <PreferenceScreen android:key="meticulus_extra"
 +	android:title="@string/meticulus_extra"
 +	android:summary="@string/meticulus_extra_summary"
-+	android:icon="@drawable/ic_settings"
++	android:icon="@drawable/ic_bugreport"
 +	android:order="-300" >
 +	<intent android:action="android.intent.action.MAIN"
 +	    android:targetPackage="com.android.settings"
 +	    android:targetClass="com.meticulus.codinalteparts.app.MainActivity" />
 +    </PreferenceScreen>
++    <PreferenceScreen android:key="meticulus_led"
++	android:title="@string/meticulus_led"
++	android:summary="@string/meticulus_led_summary"
++	android:icon="@drawable/ic_lightbulb_outline_24"
++	android:order="-299" >
++	<intent android:action="android.intent.action.MAIN"
++	    android:targetPackage="com.android.settings"
++	    android:targetClass="com.meticulus.codinalteparts.app.LedActivity" />
++    </PreferenceScreen>
      <Preference
          android:key="gesture_settings"
          android:title="@string/gesture_preference_title"
-@@ -62,4 +71,4 @@
+@@ -62,4 +80,4 @@
          android:order="-20"
          android:fragment="com.android.settings.system.ResetDashboardFragment" />
  
