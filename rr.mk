@@ -25,6 +25,9 @@ $(call inherit-product, device/huawei/hi6250/cm.mk)
 
 PRODUCT_NAME := rr_hi6250
 
+PRODUCT_PACKAGES += \
+    charger_res_images
+
 ifeq ($(AUTOPATCH),true)
     $(shell cd device/huawei/hi6250/patches 2>&1 > /dev/null && ./patch.sh rr >&2)
 else
