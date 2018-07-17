@@ -1,20 +1,27 @@
-From 94a0427a0424fef0090d817d96708076b41ab5a7 Mon Sep 17 00:00:00 2001
+From f60ab9fbbf1fa1e841185a1bf399addcfe7c3e0e Mon Sep 17 00:00:00 2001
 From: Meticulus <theonejohnnyd@gmail.com>
-Date: Sat, 31 Mar 2018 09:39:03 -0500
+Date: Sun, 15 Jul 2018 06:28:16 -0500
 Subject: [PATCH] "0001-linker-CoH-Shimmer _______________________________
 
-*Previous From f4e41af0e2b9fc44bcc6a38a8b6029c405493883 Mon Sep 17 00:00:00 2001
+*Previous From 94a0427a0424fef0090d817d96708076b41ab5a7 Mon Sep 17 00:00:00 2001
 *Previous From: Meticulus <theonejohnnyd@gmail.com>
-*Previous Date: Wed, 28 Mar 2018 08:39:38 -0500
-*Previous Subject: [PATCH] linker: CoH Shimmer
+*Previous Date: Sat, 31 Mar 2018 09:39:03 -0500
+*Previous Subject: [PATCH] "0001-linker-CoH-Shimmer _______________________________
 *
-*-Plug into the Coh Vendor Project for getting shim list.
-*-Hopefully this will simplify shimming accross ROMs.
-*-Sould work in addition to any ROMs shim solution.
+**Previous From f4e41af0e2b9fc44bcc6a38a8b6029c405493883 Mon Sep 17 00:00:00 2001
+**Previous From: Meticulus <theonejohnnyd@gmail.com>
+**Previous Date: Wed, 28 Mar 2018 08:39:38 -0500
+**Previous Subject: [PATCH] linker: CoH Shimmer
+**
+**-Plug into the Coh Vendor Project for getting shim list.
+**-Hopefully this will simplify shimming accross ROMs.
+**-Sould work in addition to any ROMs shim solution.
+**
+**Change-Id: If2697911d225ec2338db97ef6c505d40c00a9d2e"
 *
-*Change-Id: If2697911d225ec2338db97ef6c505d40c00a9d2e"
+*Change-Id: Ide67e4a7bfde0bf2a39f0d0d130546c945efbd2d"
 
-Change-Id: Ide67e4a7bfde0bf2a39f0d0d130546c945efbd2d
+Change-Id: I3cd7753b791ae541bc0efd175010f25d1c112f2f
 ---
  linker/Android.bp | 10 ++++++++--
  linker/linker.cpp | 24 +++++++++++++++++++++++-
@@ -56,7 +63,7 @@ index d74fbd3..6ef8df0 100644
          // Important: The liblinker_malloc should be the last library in the list
          // to overwrite any other malloc implementations by other static libraries.
 diff --git a/linker/linker.cpp b/linker/linker.cpp
-index 6ecb9eb..c8c48d5 100644
+index 620e189..a4439dd 100644
 --- a/linker/linker.cpp
 +++ b/linker/linker.cpp
 @@ -69,7 +69,14 @@
@@ -75,10 +82,10 @@ index 6ecb9eb..c8c48d5 100644
  // Override macros to use C++ style casts.
  #undef ELF_ST_TYPE
  #define ELF_ST_TYPE(x) (static_cast<uint32_t>(x) & 0xf)
-@@ -1184,6 +1191,21 @@ static void for_each_dt_needed(const ElfReader& elf_reader, F action) {
-   for_each_matching_shim(get_executable_path(), action);
-   for_each_matching_shim(elf_reader.name(), action);
- #endif
+@@ -1168,6 +1175,21 @@ const char* fix_dt_needed(const char* dt_needed, const char* sopath __unused) {
+ 
+ template<typename F>
+ static void for_each_dt_needed(const ElfReader& elf_reader, F action) {
 +  /* START [CoH Shimmer]
 +   * Meticulus:
 +   * The following lines of code should be the first lines

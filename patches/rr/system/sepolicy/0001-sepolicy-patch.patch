@@ -1,47 +1,54 @@
-From b056660221b5b3ba92db79f6d767e3e405eb9e94 Mon Sep 17 00:00:00 2001
+From 4d27378716da5f84a8d6bd091ceb9684edbfb579 Mon Sep 17 00:00:00 2001
 From: Meticulus <theonejohnnyd@gmail.com>
-Date: Wed, 28 Feb 2018 09:13:41 -0600
+Date: Sun, 15 Jul 2018 06:31:22 -0500
 Subject: [PATCH] "0001-sepolicy-patch _______________________________
 
-*Previous From 22c3cd80cb3cce0a28cb3db4318ddd275ac9afb6 Mon Sep 17 00:00:00 2001
+*Previous From b056660221b5b3ba92db79f6d767e3e405eb9e94 Mon Sep 17 00:00:00 2001
 *Previous From: Meticulus <theonejohnnyd@gmail.com>
-*Previous Date: Mon, 18 Dec 2017 09:12:07 -0600
+*Previous Date: Wed, 28 Feb 2018 09:13:41 -0600
 *Previous Subject: [PATCH] "0001-sepolicy-patch _______________________________
 *
-**Previous From 103292bf70cc43bf245ecb52ccff6b818ba4798e Mon Sep 17 00:00:00 2001
+**Previous From 22c3cd80cb3cce0a28cb3db4318ddd275ac9afb6 Mon Sep 17 00:00:00 2001
 **Previous From: Meticulus <theonejohnnyd@gmail.com>
-**Previous Date: Sun, 17 Dec 2017 05:11:50 -0600
+**Previous Date: Mon, 18 Dec 2017 09:12:07 -0600
 **Previous Subject: [PATCH] "0001-sepolicy-patch _______________________________
 **
-***Previous From d1cd27a9a3d7a837dc4486935b4bf577aec35226 Mon Sep 17 00:00:00 2001
+***Previous From 103292bf70cc43bf245ecb52ccff6b818ba4798e Mon Sep 17 00:00:00 2001
 ***Previous From: Meticulus <theonejohnnyd@gmail.com>
-***Previous Date: Tue, 12 Dec 2017 05:29:48 -0600
+***Previous Date: Sun, 17 Dec 2017 05:11:50 -0600
 ***Previous Subject: [PATCH] "0001-sepolicy-patch _______________________________
 ***
-****Previous From c29de7d512886795240f794124598d597f07dd12 Mon Sep 17 00:00:00 2001
+****Previous From d1cd27a9a3d7a837dc4486935b4bf577aec35226 Mon Sep 17 00:00:00 2001
 ****Previous From: Meticulus <theonejohnnyd@gmail.com>
-****Previous Date: Fri, 1 Dec 2017 04:47:53 -0600
+****Previous Date: Tue, 12 Dec 2017 05:29:48 -0600
 ****Previous Subject: [PATCH] "0001-sepolicy-patch _______________________________
 ****
-*****Previous From b469cd826322cec0d92188c9790ca3dec2c3e557 Mon Sep 17 00:00:00 2001
+*****Previous From c29de7d512886795240f794124598d597f07dd12 Mon Sep 17 00:00:00 2001
 *****Previous From: Meticulus <theonejohnnyd@gmail.com>
-*****Previous Date: Sat, 8 Apr 2017 15:52:17 -0500
-*****Previous Subject: [PATCH] 0001-sepolicy-patch
+*****Previous Date: Fri, 1 Dec 2017 04:47:53 -0600
+*****Previous Subject: [PATCH] "0001-sepolicy-patch _______________________________
 *****
-*****Change-Id: I62d72022d19714ac8a719d22bc651a3348dabe94"
-****
-****Change-Id: Id916b91b48d9a6de5a7141a64a47941d99488dca""""
+******Previous From b469cd826322cec0d92188c9790ca3dec2c3e557 Mon Sep 17 00:00:00 2001
+******Previous From: Meticulus <theonejohnnyd@gmail.com>
+******Previous Date: Sat, 8 Apr 2017 15:52:17 -0500
+******Previous Subject: [PATCH] 0001-sepolicy-patch
+******
+******Change-Id: I62d72022d19714ac8a719d22bc651a3348dabe94"
+*****
+*****Change-Id: Id916b91b48d9a6de5a7141a64a47941d99488dca"""""
+
+Change-Id: I4ac8d02d62634eb2ad022f0e952e73fe679a8126
 ---
  private/app.te    |  2 +-
  private/domain.te |  1 +
  private/logd.te   | 12 ++++++------
- public/domain.te  | 24 ++++++++++++------------
+ public/domain.te  | 26 +++++++++++++-------------
  public/init.te    |  2 +-
  public/kernel.te  |  2 +-
- 6 files changed, 22 insertions(+), 21 deletions(-)
+ 6 files changed, 23 insertions(+), 22 deletions(-)
 
 diff --git a/private/app.te b/private/app.te
-index c0deb08..bbb8282 100644
+index 55409f5..0ec64a2 100644
 --- a/private/app.te
 +++ b/private/app.te
 @@ -438,7 +438,7 @@ neverallow appdomain exec_type:file
@@ -89,7 +96,7 @@ index 4338e40..c338da2 100644
  # protect the event-log-tags file
  neverallow {
 diff --git a/public/domain.te b/public/domain.te
-index 8640baa..8468eff 100644
+index 2cbe397..dff2882 100644
 --- a/public/domain.te
 +++ b/public/domain.te
 @@ -227,7 +227,7 @@ with_asan(`allow domain system_data_file:dir getattr;')
@@ -110,7 +117,7 @@ index 8640baa..8468eff 100644
  
  # Don't allow raw read/write/open access to generic devices.
  # Rather force a relabel to a more specific type.
-@@ -429,7 +429,7 @@ neverallow { domain -recovery } contextmount_type:dir_file_class_set
+@@ -431,7 +431,7 @@ neverallow { domain -recovery } contextmount_type:dir_file_class_set
  # system_app_service rather than the generic type.
  # New service_types are defined in {,hw,vnd}service.te and new mappings
  # from service name to service_type are defined in {,hw,vnd}service_contexts.
@@ -119,7 +126,7 @@ index 8640baa..8468eff 100644
  neverallow * default_android_vndservice:service_manager { add find };
  neverallow * default_android_hwservice:hwservice_manager { add find };
  
-@@ -444,7 +444,7 @@ neverallow * hidl_base_hwservice:hwservice_manager find;
+@@ -446,7 +446,7 @@ neverallow * hidl_base_hwservice:hwservice_manager find;
  
  # Require that domains explicitly label unknown properties, and do not allow
  # anyone but init to modify unknown properties.
@@ -128,7 +135,7 @@ index 8640baa..8468eff 100644
  neverallow { domain -init } mmc_prop:property_service set;
  
  # Do not allow reading device's serial number from system properties except form
-@@ -862,14 +862,14 @@ neverallow ~domain domain:process { transition dyntransition };
+@@ -864,15 +864,15 @@ neverallow ~domain domain:process { transition dyntransition };
  # Example type transition:
  #  mydomain.te:file_type_auto_trans(mydomain, system_data_file, new_file_type)
  #
@@ -138,6 +145,7 @@ index 8640baa..8468eff 100644
 -  -system_app
 -  -init
 -  -installd # for relabelfrom and unlink, check for this in explicit neverallow
+-  -update_engine
 -  with_asan(`-asan_extract')
 -} system_data_file:file no_w_file_perms;
 +#neverallow {
@@ -146,6 +154,7 @@ index 8640baa..8468eff 100644
 +#  -system_app
 +#  -init
 +#  -installd # for relabelfrom and unlink, check for this in explicit neverallow
++#  -update_engine
 +#  with_asan(`-asan_extract')
 +#} system_data_file:file no_w_file_perms;
  # do not grant anything greater than r_file_perms and relabelfrom unlink

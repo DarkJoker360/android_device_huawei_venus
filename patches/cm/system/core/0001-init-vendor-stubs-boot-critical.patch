@@ -1,36 +1,41 @@
-From e41de8b223edc0da3df9d53ef9e2aaad4ccc6f30 Mon Sep 17 00:00:00 2001
+From cddfef0ddefe71e04b82676733a740bf37bad020 Mon Sep 17 00:00:00 2001
 From: Meticulus <theonejohnnyd@gmail.com>
-Date: Wed, 28 Feb 2018 09:00:28 -0600
+Date: Thu, 7 Jun 2018 08:13:59 -0500
 Subject: [PATCH] "0001-init-vendor-stubs-boot-critical
  _______________________________
 
-*Previous From f5397762c334f8fa4e234963829f905a664c7c48 Mon Sep 17 00:00:00 2001
+*Previous From e41de8b223edc0da3df9d53ef9e2aaad4ccc6f30 Mon Sep 17 00:00:00 2001
 *Previous From: Meticulus <theonejohnnyd@gmail.com>
-*Previous Date: Fri, 1 Dec 2017 16:17:50 -0600
+*Previous Date: Wed, 28 Feb 2018 09:00:28 -0600
 *Previous Subject: [PATCH] "0001-init-vendor-stubs-boot-critical
 *_______________________________
 *
-**Previous From 41db2ec4e7477de3ac472470e3ef3f56a65c084e Mon Sep 17 00:00:00 2001
+**Previous From f5397762c334f8fa4e234963829f905a664c7c48 Mon Sep 17 00:00:00 2001
 **Previous From: Meticulus <theonejohnnyd@gmail.com>
-**Previous Date: Sat, 24 Dec 2016 23:43:28 -0600
-**Previous Subject: [PATCH] 0001-init-vendor-stubs
+**Previous Date: Fri, 1 Dec 2017 16:17:50 -0600
+**Previous Subject: [PATCH] "0001-init-vendor-stubs-boot-critical
+**_______________________________
 **
-**Change-Id: I31679a326358efa3962ed18bbc128e379fbe6c46""
+***Previous From 41db2ec4e7477de3ac472470e3ef3f56a65c084e Mon Sep 17 00:00:00 2001
+***Previous From: Meticulus <theonejohnnyd@gmail.com>
+***Previous Date: Sat, 24 Dec 2016 23:43:28 -0600
+***Previous Subject: [PATCH] 0001-init-vendor-stubs
+***
+***Change-Id: I31679a326358efa3962ed18bbc128e379fbe6c46"""
 ---
- init/property_service.cpp |  5 ++++-
+ init/property_service.cpp |  4 +++-
  init/vendor_init.cpp      | 12 +++++++++++-
  init/vendor_init.h        |  4 +++-
- 3 files changed, 18 insertions(+), 3 deletions(-)
+ 3 files changed, 17 insertions(+), 3 deletions(-)
 
 diff --git a/init/property_service.cpp b/init/property_service.cpp
-index 5f34a16..03c6f12 100644
+index 49ba47e..7861510 100644
 --- a/init/property_service.cpp
 +++ b/init/property_service.cpp
-@@ -682,9 +682,12 @@ void property_load_boot_defaults() {
-     load_properties_from_file("/vendor/default.prop", NULL);
- 
-     update_sys_usb_config();
-+
+@@ -684,9 +684,11 @@ void property_load_boot_defaults() {
+     if (android::base::GetBoolProperty("ro.persistent_properties.ready", false)) {
+         update_sys_usb_config();
+     }
 +    vendor_load_default_properties();
  }
  
@@ -39,7 +44,7 @@ index 5f34a16..03c6f12 100644
      if (ALLOW_LOCAL_PROP_OVERRIDE) {
          load_properties_from_file("/data/local.prop", NULL);
      }
-@@ -740,7 +743,7 @@ void load_system_props() {
+@@ -753,7 +755,7 @@ void load_system_props() {
      load_properties_from_file("/factory/factory.prop", "ro.*");
  
      // Update with vendor-specific property runtime overrides
