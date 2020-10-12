@@ -14,6 +14,9 @@
 # limitations under the License.
 #
 
+# Assert
+TARGET_OTA_ASSERT_DEVICE := venus,hi6250
+
 # Architecture
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
