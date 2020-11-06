@@ -72,6 +72,10 @@ PRODUCT_PACKAGES += \
     audio.usb.default \
     audio.r_submix.default \
 
+# Bluetooth
+PRODUCT_PACKAGES += \
+    libbt-vendor
+
 # Hardware
 PRODUCT_PACKAGES += \
     power.hi6250 \
