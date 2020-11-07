@@ -26,9 +26,6 @@ $(call inherit-product, device/huawei/hi6250/cm.mk)
 
 PRODUCT_NAME := aosp_hi6250
 
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/kernel:kernel
-
 PRODUCT_PACKAGES += \
     Launcher3 \
     messaging \

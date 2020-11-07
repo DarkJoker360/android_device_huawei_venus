@@ -15,12 +15,6 @@
 #
 
 ifeq ($(I_AM_CODEOFHONOR), true)
-# Use my custom build ninja that prints to screen sequentially
-# so you can see whats going on.
-# Resolve depenancy issue: sudo apt-get install libc++-dev
-$(shell echo "Using CodeOfHonor's Ninja" >&2)
-$(shell cp -f $(LOCAL_PATH)/prebuilt/ninja prebuilts/build-tools/linux-x86/bin/ninja)
-
 # CodeOfHonor recovery init rc
 PRODUCT_COPY_FILES += \
         $(LOCAL_PATH)/recovery/init.recovery.meticulus.rc:root/init.recovery.meticulus.rc
@@ -33,9 +27,6 @@ PRODUCT_PACKAGES += \
 
 # CodeOfHonor Releasetools
 TARGET_RELEASETOOLS_EXTENSIONS := $(LOCAL_PATH)
-
-else
-$(shell cd prebuilts/build-tools && git checkout linux-x86/bin/ninja)
 endif
 
 PRODUCT_PACKAGES += \
