@@ -225,12 +225,6 @@ etclinks := \
     hsmConfig \
     HwFrameworkNormalization.xml \
     ikedconfig \
-    media_codecs_google_audio.xml \
-    media_codecs_google_telephony.xml \
-    media_codecs_google_video.xml \
-    media_codecs_performance.xml \
-    media_codecs.xml \
-    media_profiles.xml \
     mkshrc \
     modemConfig \
     native_packages.xml \
@@ -318,12 +312,6 @@ etclinks := \
     hsmConfig \
     HwFrameworkNormalization.xml \
     ikedconfig \
-    media_codecs_google_audio.xml \
-    media_codecs_google_telephony.xml \
-    media_codecs_google_video.xml \
-    media_codecs_performance.xml \
-    media_codecs.xml \
-    media_profiles.xml \
     mkshrc \
     modemConfig \
     native_packages.xml \

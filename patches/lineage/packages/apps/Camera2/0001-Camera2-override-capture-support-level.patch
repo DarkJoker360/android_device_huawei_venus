@@ -6,7 +6,7 @@ Subject: [PATCH] "0001-Camera2-override-capture-support-level
 
 *Previous From 95c1b1fd6d4ca9486cc39fc3e30378f9f4711c02 Mon Sep 17 00:00:00 2001
 *Previous From: Meticulus <theonejohnnyd@gmail.com>
-*Previous Date: Mon, 5 Dec 2016 17:27:53 -0600
+*Previous Date: Mon, 5 Dec 2020 17:27:53 -0600
 *Previous Subject: [PATCH] Camera2: override capture support level
 *
 *-The capture support level detected for our Camera is

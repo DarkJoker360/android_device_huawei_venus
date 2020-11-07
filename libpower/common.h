@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2012 The Android Open Source Project
- * Copyright (C) 2016 Jonathan Jason Dennis [Meticulus]
+ * Copyright (C) 2020 Jonathan Jason Dennis [Meticulus]
  *					theonejohnnyd@gmail.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");

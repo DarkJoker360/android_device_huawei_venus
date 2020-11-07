@@ -1,6 +1,6 @@
 #
 # Meticulus hi6250 libcopybit_wrapper
-# Copyright (c) 2017 Jonathan Dennis [Meticulus]
+# Copyright (C) 2017 Jonathan Dennis [Meticulus]
 #                               theonejohnnyd@gmail.com
 #
 # This program is free software; you can redistribute it and/or modify

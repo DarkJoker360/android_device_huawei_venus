@@ -54,7 +54,7 @@
 #define BERLIN_CPU0_FREQ_MAX_1	 	"1709000\n"
 #define BERLIN_CPU0_FREQ_LOW_1	 	"480000\n"
 
-#define BERLIN_CPU4_FREQ_MAX_1	 	"2016000\n"
+#define BERLIN_CPU4_FREQ_MAX_1	 	"2020000\n"
 #define BERLIN_CPU4_FREQ_LOW_1	 	"1402000\n"
 
 /* end profile balanced */

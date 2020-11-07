@@ -19,8 +19,8 @@
 /*
  * Custom HwComposer module for HiSilicon based devices
  *
- * Copyright (C) 2016 Eduardo Alonso
- * Copyright (C) 2016 Honor8Dev
+ * Copyright (C) 2020 Eduardo Alonso
+ * Copyright (C) 2020 Honor8Dev
  * Based on 1.0 HwC
  *
  * This software is licensed under the terms of the GNU General Public

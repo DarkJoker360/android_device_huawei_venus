@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2012 The Android Open Source Project
- * Copyright (C) 2016 Jonathan Jason Dennis [Meticulus]
+ * Copyright (C) 2020 Jonathan Jason Dennis [Meticulus]
  *					theonejohnnyd@gmail.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -54,7 +54,7 @@
 #define VENUS_CPU0_FREQ_MAX_1	 	"1709000\n"
 #define VENUS_CPU0_FREQ_LOW_1	 	"480000\n"
 
-#define VENUS_CPU4_FREQ_MAX_1	 	"2016000\n"
+#define VENUS_CPU4_FREQ_MAX_1	 	"2020000\n"
 #define VENUS_CPU4_FREQ_LOW_1	 	"1402000\n"
 
 /* end profile balanced */
@@ -73,7 +73,7 @@
 #define VENUS_CPU0_FREQ_MAX_2	 	"1709000\n"
 #define VENUS_CPU0_FREQ_LOW_2	 	"480000\n"
 
-#define VENUS_CPU4_FREQ_MAX_2	 	"2016000\n"
+#define VENUS_CPU4_FREQ_MAX_2	 	"2020000\n"
 #define VENUS_CPU4_FREQ_LOW_2	 	"1402000\n"
 
 /* end profile performance */
