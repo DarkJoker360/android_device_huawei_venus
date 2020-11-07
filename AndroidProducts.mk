@@ -15,12 +15,4 @@
 #
 
 PRODUCT_MAKEFILES := \
-    omni_hi6250:$(LOCAL_DIR)/omni.mk \
-    cm_hi6250:$(LOCAL_DIR)/cm.mk \
-    slim_hi6250:$(LOCAL_DIR)/slim.mk \
-    lineage_hi6250:$(LOCAL_DIR)/lineage.mk \
-    rr_hi6250:$(LOCAL_DIR)/rr.mk \
-    validus_hi6250:$(LOCAL_DIR)/validus.mk \
-    aosp_hi6250:$(LOCAL_DIR)/aosp.mk \
-    gzosp_hi6250:$(LOCAL_DIR)/gzosp.mk
-
+    $(LOCAL_DIR)/lineage.mk \
