@@ -37,7 +37,7 @@ PRODUCT_PACKAGES += \
     mkyaffs2image \
     mkuserimg.sh
 
-ADDITIONAL_DEFAULT_PROPERTIES += \
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.zygote=zygote64_32 \
     ro.secure=0 \
     ro.adb.secure=0 \

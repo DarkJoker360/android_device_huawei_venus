@@ -126,11 +126,7 @@ TARGET_RECOVERY_FSTAB := device/huawei/hi6250/rootdir/fstab.hi6250
 BOARD_HARDWARE_CLASS := device/huawei/hi6250/lineagehw/
 
 # SELinux
-BOARD_SEPOLICY_DIRS += $(TOP)/device/huawei/hi6250/sepolicy
-
-ifneq ($(TARGET_PRODUCT), aosp_hi6250)
-BOARD_SEPOLICY_DIRS += $(TOP)/device/huawei/hi6250/cm_sepolicy
-endif
+BOARD_SEPOLICY_VERS := $(PLATFORM_SDK_VERSION).0
 
 TARGET_EXFAT_DRIVER := exfat
 
