@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2016 Jonathan Jason Dennis (theonejohnnyd@gmail.com)
+# Copyright (C) 2020 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,12 +15,4 @@
 #
 
 PRODUCT_MAKEFILES := \
-    omni_hi6250:$(LOCAL_DIR)/omni.mk \
-    cm_hi6250:$(LOCAL_DIR)/cm.mk \
-    slim_hi6250:$(LOCAL_DIR)/slim.mk \
-    lineage_hi6250:$(LOCAL_DIR)/lineage.mk \
-    rr_hi6250:$(LOCAL_DIR)/rr.mk \
-    validus_hi6250:$(LOCAL_DIR)/validus.mk \
-    aosp_hi6250:$(LOCAL_DIR)/aosp.mk \
-    gzosp_hi6250:$(LOCAL_DIR)/gzosp.mk
-
+    $(LOCAL_DIR)/lineage.mk \

@@ -22,18 +22,8 @@ checkerror() {
 
 if [[ "$ROM" == "" ]]; then
 	cd $TOPDIR
-	if [[ -e vendor/cm ]]; then
-		if [[ $(cat vendor/cm/README.mkdn | grep -c "Resurrection Remix") -gt 0 ]]; then
-			ROM="rr"
-		else
-			ROM="cm"
-		fi
-	elif [[ -e vendor/slim ]]; then
-		ROM="slim"
-	elif [[ -e vendor/omni ]]; then
-		ROM="omni"
-	elif [[ -e vendor/validus ]]; then
-		ROM="validus"
+	if [[ -e vendor/lineage ]]; then
+		ROM="lineage"
 	else
 		ROM="aosp"
 	fi
